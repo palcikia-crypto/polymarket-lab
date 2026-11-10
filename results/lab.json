@@ -1,0 +1,762 @@
+{
+ "updated": "2026-11-10T12:22:34Z",
+ "status": "ready",
+ "status_note": "База достаточна. Подтвержднных OOS закономерностей: 1 из 8 гипотез.",
+ "settled_this_run": 30,
+ "backfilled": 0,
+ "base_up_rate": 0.489,
+ "data": {
+  "windows": 3248,
+  "settled": 2211,
+  "snaps": 11435,
+  "span_h": 77.5,
+  "hist": 761
+ },
+ "model": {
+  "n": 217,
+  "is": {
+   "n": 167,
+   "brier": 0.1453,
+   "acc": 78.4
+  },
+  "oos": {
+   "n": 50,
+   "brier": 0.1824,
+   "acc": 62.0
+  },
+  "mkt_cmp": {
+   "is": "мод 0.1453 / рынок 0.1357",
+   "oos": "мод 0.1824 / рынок 0.2004"
+  },
+  "mkt_brier": {
+   "is": 0.1357,
+   "oos": 0.2004
+  },
+  "blend": {
+   "is": 0.1369,
+   "oos": 0.188
+  },
+  "per_tag": {
+   "sht15": {
+    "n": 84,
+    "brier": 0.1613,
+    "acc": 71.4
+   },
+   "sht5": {
+    "n": 133,
+    "brier": 0.1491,
+    "acc": 76.7
+   }
+  }
+ },
+ "rule": {
+  "is": {
+   "n": 57,
+   "winrate": 59.6,
+   "pnl_r": 9.35,
+   "ev": 0.164
+  },
+  "oos": {
+   "n": 15,
+   "winrate": 60.0,
+   "pnl_r": 10.27,
+   "ev": 0.685
+  },
+  "total": {
+   "n": 72,
+   "winrate": 59.7,
+   "pnl_r": 19.62,
+   "ev": 0.273
+  },
+  "sample": [
+   {
+    "t": 1794242427,
+    "tag": "sht15",
+    "part": "oos",
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.146
+   },
+   {
+    "t": 1794242427,
+    "tag": "sht15",
+    "part": "oos",
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.14
+   },
+   {
+    "t": 1794238415,
+    "tag": "sht15",
+    "part": "oos",
+    "win": 1,
+    "pnl": 0.37,
+    "px": 0.725
+   },
+   {
+    "t": 1794234958,
+    "tag": "sht15",
+    "part": "oos",
+    "win": 1,
+    "pnl": 0.439,
+    "px": 0.69
+   },
+   {
+    "t": 1794231404,
+    "tag": "sht5",
+    "part": "oos",
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.265
+   },
+   {
+    "t": 1794231404,
+    "tag": "sht5",
+    "part": "oos",
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.485
+   },
+   {
+    "t": 1794231404,
+    "tag": "sht5",
+    "part": "oos",
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.33
+   },
+   {
+    "t": 1794223013,
+    "tag": "sht5",
+    "part": "oos",
+    "win": 1,
+
+    "pnl": 1.02,
+    "px": 0.49
+   },
+   {
+    "t": 1794223013,
+    "tag": "sht5",
+    "part": "oos",
+    "win": 1,
+    "pnl": 0.887,
+    "px": 0.525
+   },
+   {
+    "t": 1794219474,
+    "tag": "sht5",
+    "part": "oos",
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.295
+   },
+   {
+    "t": 1794219474,
+    "tag": "sht5",
+    "part": "oos",
+    "win": 1,
+    "pnl": 1.151,
+    "px": 0.46
+   },
+   {
+    "t": 1794219474,
+    "tag": "sht5",
+    "part": "oos",
+    "win": 1,
+    "pnl": 1.151,
+    "px": 0.46
+   }
+  ]
+ },
+ "bins": [
+  {
+   "lo": 0.0,
+   "hi": 0.05,
+   "n": 30,
+   "mkt": 0.013,
+   "real": 0.0,
+   "is_real": 0.0,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.05,
+   "hi": 0.1,
+   "n": 6,
+   "mkt": 0.076,
+   "real": 0.0,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.1,
+   "hi": 0.15,
+   "n": 2,
+   "mkt": 0.13,
+   "real": 0.0,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.15,
+   "hi": 0.2,
+   "n": 3,
+   "mkt": 0.177,
+   "real": 0.0,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.2,
+   "hi": 0.25,
+   "n": 5,
+   "mkt": 0.229,
+   "real": 0.2,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.25,
+   "hi": 0.3,
+   "n": 7,
+   "mkt": 0.273,
+   "real": 0.0,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.3,
+   "hi": 0.35,
+   "n": 12,
+   "mkt": 0.322,
+   "real": 0.25,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.35,
+   "hi": 0.4,
+   "n": 7,
+   "mkt": 0.384,
+   "real": 0.286,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.4,
+   "hi": 0.45,
+   "n": 12,
+   "mkt": 0.42,
+   "real": 0.5,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.45,
+   "hi": 0.5,
+   "n": 17,
+   "mkt": 0.479,
+   "real": 0.706,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.5,
+   "hi": 0.55,
+   "n": 25,
+   "mkt": 0.52,
+   "rea
+l": 0.64,
+   "is_real": 0.533,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.55,
+   "hi": 0.6,
+   "n": 6,
+   "mkt": 0.576,
+   "real": 0.5,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.6,
+   "hi": 0.65,
+   "n": 8,
+   "mkt": 0.624,
+   "real": 0.125,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.65,
+   "hi": 0.7,
+   "n": 12,
+   "mkt": 0.671,
+   "real": 0.583,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.7,
+   "hi": 0.75,
+   "n": 10,
+   "mkt": 0.718,
+   "real": 0.8,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.75,
+   "hi": 0.8,
+   "n": 5,
+   "mkt": 0.771,
+   "real": 0.4,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.8,
+   "hi": 0.85,
+   "n": 6,
+   "mkt": 0.826,
+   "real": 1.0,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.85,
+   "hi": 0.9,
+   "n": 9,
+   "mkt": 0.865,
+   "real": 0.778,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.9,
+   "hi": 0.95,
+   "n": 5,
+   "mkt": 0.929,
+   "real": 1.0,
+   "is_real": null,
+   "oos_real": null,
+   "flag": false
+  },
+  {
+   "lo": 0.95,
+   "hi": 1.0,
+   "n": 46,
+   "mkt": 0.989,
+   "real": 0.957,
+   "is_real": 0.974,
+   "oos_real": null,
+   "flag": false
+  }
+ ],
+ "streaks": [
+  {
+   "tag": "sht15",
+   "k": 1,
+   "n_up": 312,
+   "p_after_up": 0.657,
+   "n_dn": 307,
+   "p_after_dn": 0.349
+  },
+  {
+   "tag": "sht15",
+   "k": 2,
+   "n_up": 205,
+   "p_after_up": 0.571,
+   "n_dn": 199,
+   "p_after_dn": 0.402
+  },
+  {
+   "tag": "sht15",
+   "k": 3,
+   "n_up": 117,
+   "p_after_up": 0.607,
+   "n_dn": 119,
+   "p_after_dn": 0.353
+  },
+  {
+   "tag": "sht5",
+   "k": 1,
+   "n_up": 769,
+   "p_after_up": 0.724,
+   "n_dn": 821,
+   "p_after_dn": 0.258
+  },
+  {
+   "tag": "sht5",
+   "k": 2,
+   "n_up": 556,
+   "p_after_up": 0.714,
+   "n_dn": 609,
+   "p_after_dn": 0.238
+  },
+  {
+   "tag": "sht5",
+   "k": 3,
+   "n_up": 396,
+
+   "p_after_up": 0.682,
+   "n_dn": 464,
+   "p_after_dn": 0.248
+  }
+ ],
+ "hours": [
+  {
+   "hour": 0,
+   "n": 96,
+   "up_rate": 0.427,
+   "flag": false
+  },
+  {
+   "hour": 1,
+   "n": 96,
+   "up_rate": 0.427,
+   "flag": false
+  },
+  {
+   "hour": 2,
+   "n": 96,
+   "up_rate": 0.5,
+   "flag": false
+  },
+  {
+   "hour": 3,
+   "n": 96,
+   "up_rate": 0.469,
+   "flag": false
+  },
+  {
+   "hour": 4,
+   "n": 96,
+   "up_rate": 0.396,
+   "flag": false
+  },
+  {
+   "hour": 5,
+   "n": 96,
+   "up_rate": 0.438,
+   "flag": false
+  },
+  {
+   "hour": 6,
+   "n": 96,
+   "up_rate": 0.427,
+   "flag": false
+  },
+  {
+   "hour": 7,
+   "n": 96,
+   "up_rate": 0.604,
+   "flag": true
+  },
+  {
+   "hour": 8,
+   "n": 96,
+   "up_rate": 0.667,
+   "flag": true
+  },
+  {
+   "hour": 9,
+   "n": 96,
+   "up_rate": 0.385,
+   "flag": true
+  },
+  {
+   "hour": 10,
+   "n": 96,
+   "up_rate": 0.531,
+   "flag": false
+  },
+  {
+   "hour": 11,
+   "n": 96,
+   "up_rate": 0.479,
+   "flag": false
+  },
+  {
+   "hour": 12,
+   "n": 96,
+   "up_rate": 0.615,
+   "flag": true
+  },
+  {
+   "hour": 13,
+   "n": 104,
+   "up_rate": 0.481,
+   "flag": false
+  },
+  {
+   "hour": 14,
+   "n": 104,
+   "up_rate": 0.606,
+   "flag": true
+  },
+  {
+   "hour": 15,
+   "n": 104,
+   "up_rate": 0.577,
+   "flag": false
+  },
+  {
+   "hour": 16,
+   "n": 104,
+   "up_rate": 0.413,
+   "flag": false
+  },
+  {
+   "hour": 17,
+   "n": 104,
+   "up_rate": 0.385,
+   "flag": true
+  },
+  {
+   "hour": 18,
+   "n": 83,
+   "up_rate": 0.578,
+   "flag": false
+  },
+  {
+   "hour": 19,
+   "n": 60,
+   "up_rate": 0.5,
+   "flag": false
+  },
+  {
+   "hour": 20,
+   "n": 60,
+   "up_rate": 0.267,
+   "flag": true
+  },
+  {
+   "hour": 21,
+   "n": 60,
+   "up_rate": 0.433,
+   "flag": false
+  },
+  {
+   "hour": 22,
+   "n": 84,
+   "up_rate": 0.524,
+   "flag": false
+  },
+  {
+   "hour": 23,
+   "n": 96,
+   "up_rate": 0.531,
+   "flag": false
+  }
+ ],
+ "streak_edge": {
+  "probs": {
+   "after_up": 0.527,
+   "after_down": 0.468
+  },
+  "n_est": {
+   "up": 740,
+   "down": 802
+  },
+  "oos": {
+   "n": 20,
+   
+"winrate": 45.0,
+   "ev": 0.432
+  },
+  "trades": [
+   {
+    "t": 1794215900,
+    "win": 1,
+    "pnl": 1.941,
+    "px": 0.335,
+    "tag": "sht15"
+   },
+   {
+    "t": 1794215900,
+    "win": 1,
+    "pnl": 6.143,
+    "px": 0.135,
+    "tag": "sht5"
+   },
+   {
+    "t": 1794223013,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.455,
+    "tag": "sht5"
+   },
+   {
+    "t": 1794223013,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.475,
+    "tag": "sht5"
+   },
+   {
+    "t": 1794231404,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.275,
+    "tag": "sht15"
+   },
+   {
+    "t": 1794231404,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.435,
+    "tag": "sht15"
+   },
+   {
+    "t": 1794238415,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.325,
+    "tag": "sht15"
+   },
+   {
+    "t": 1794238415,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.275,
+    "tag": "sht15"
+   },
+   {
+    "t": 1794242427,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.146,
+    "tag": "sht15"
+   },
+   {
+    "t": 1794242427,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.14,
+    "tag": "sht15"
+   },
+   {
+    "t": 1794245922,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.265,
+    "tag": "sht15"
+   },
+   {
+    "t": 1794245922,
+    "win": 0,
+    "pnl": -1.0,
+    "px": 0.325,
+    "tag": "sht15"
+   }
+  ]
+ },
+ "hyp": [
+  {
+   "name": "Модель точнее монетки",
+   "note": "Brier < 0.25 на обеих половинах",
+   "is_n": 167,
+   "is_v": 0.1453,
+   "oos_n": 50,
+   "oos_v": 0.1824,
+   "ok": true,
+   "status": " подтверждено OOS"
+  },
+  {
+   "name": "Модель конкурирует с рынком",
+   "note": "Brier модель vs рынок (тот же снимок)",
+   "is_n": 167,
+   "is_v": "мод 0.1453 / рынок 0.1357",
+   "oos_n": 50,
+   "oos_v": "мод 0.1824 / рынок 0.2004",
+   "ok": false,
+   "status": " отвергнуто OOS"
+  },
+  {
+   "name": "Правило эдж  5% с положительным EV",
+   "note": "бэктест по снимкам, 1 сделка на окно",
+   "is_n": 57,
+   "is_v": "EV 0.164 R",
+   "oos_n": 15,
+   "oos_v": "EV 0.685 R",
+   "ok": false,
+   "status": " копим данные"
+  },
+  {
+   "name": "Есть бин рынка 
+с системной ошибкой",
+   "note": "сдвиг >= 5пп на IS и OOS",
+   "is_n": 20,
+   "is_v": "флагов: 0",
+   "oos_n": 0,
+   "oos_v": "бинов с флагом: 0",
+   "ok": false,
+   "status": " отвергнуто OOS"
+  },
+  {
+   "name": "Стрики не дают эджа (эффективность)",
+   "note": "P(Up) после серии k в пределах 5010%",
+   "is_n": 6,
+   "is_v": "уклонений: 5",
+   "oos_n": 6,
+   "oos_v": "уклонений: 5",
+   "ok": false,
+   "status": " паттерн: стрики влияют на исход"
+  },
+  {
+   "name": "Смесь 50/50 модели и рынка бьт обоих",
+   "note": "Brier смеси < min(модель, рынок) на обеих половинах",
+   "is_n": 167,
+   "is_v": 0.1369,
+   "oos_n": 50,
+   "oos_v": 0.188,
+   "ok": false,
+   "status": " отвергнуто OOS"
+  },
+  {
+   "name": "Время суток не влияет на исход Up/Down",
+   "note": "уклонения >= 10пп от базы при n >= 50 в часе: 7:00 UTC, 8:00 UTC, 9:00 UTC",
+   "is_n": 24,
+   "is_v": "уклонений: 7",
+   "oos_n": 24,
+   "oos_v": "уклонений: 7",
+   "ok": false,
+   "status": " паттерн: время суток влияет"
+  },
+  {
+   "name": "Стрик-эдж: рынок недооценивает моментум",
+   "note": "вероятности из старых 70% данных, сделки только на новых 30%; P(Up|после Up)=0.527, P(Up|после Down)=0.468",
+   "is_n": 1542,
+   "is_v": "P(up|up)=0.527",
+   "oos_n": 20,
+   "oos_v": 0.432,
+   "ok": false,
+   "status": " копим данные"
+  }
+ ],
+ "golden": [
+  {
+   "name": "Модель точнее монетки",
+   "note": "Brier < 0.25 на обеих половинах"
+  }
+ ]
+}
