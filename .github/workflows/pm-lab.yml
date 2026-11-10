@@ -4,7 +4,7 @@ on:
     - cron: "7,37 * * * *"
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
     paths: [".github/workflows/pm-lab.yml", "autolab/lab.py"]
 concurrency:
   group: pm-lab
@@ -29,4 +29,4 @@ jobs:
           git config user.name "pm-bot"
           git config user.email "bot@users.noreply.github.com"
           git add results/ || true
-          git diff --cached --quiet || (git commit -m "auto: pm lab [skip ci]" && for i in 1 2 3; do git fetch origin && git rebase origin/master && git push origin HEAD:master && break; done)
+          git diff --cached --quiet || (git commit -m "auto: pm lab [skip ci]" && for i in 1 2 3; do git fetch origin && git rebase origin/main && git push origin HEAD:main && break; done)
