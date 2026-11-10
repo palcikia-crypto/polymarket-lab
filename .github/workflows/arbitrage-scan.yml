@@ -2,7 +2,7 @@ name: Arbitrage Scanner
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - "arbitrage/**"
       - ".github/workflows/arbitrage-scan.yml"
@@ -46,4 +46,4 @@ jobs:
           cp arbitrage/arbitrage_run.log arbitrage/last_run.txt 2>/dev/null || echo "(лог не создан)" > arbitrage/last_run.txt
           date -u +%FT%TZ >> arbitrage/last_run.txt
           git add arbitrage/ || true
-          git diff --cached --quiet || (git commit -m "arb scan [skip ci]" && git fetch origin && git rebase origin/master && git push origin HEAD:master)
+          git diff --cached --quiet || (git commit -m "arb scan [skip ci]" && git fetch origin && git rebase origin/main && git push origin HEAD:main)
