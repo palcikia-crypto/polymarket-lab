@@ -1,1 +1,21 @@
-Too many requests to this site right now. Wait before retrying, or open a different source.
+{
+ "updated": "2026-11-10T17:51:22Z",
+ "scanned": 200,
+ "signals": [
+  {
+   "strategy": "vols",
+   "slug": "will-bitcoin-reach-1000000-by-december-31-2026-946",
+   "question": "Will Bitcoin reach $1,000,000 by December 31, 2026?",
+   "outcome": "-",
+   "price": 0,
+   "edge": 0,
+   "note": "объём 24ч 39636 против среднего 9579",
+   "liq": 432128,
+   "v24": 39636,
+   "z": 0.0,
+   "end": "2027-01-01",
+   "days_left": 51.3,
+   "tradeable": false
+  }
+ ]
+}
