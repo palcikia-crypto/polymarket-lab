@@ -19,7 +19,7 @@ DATA_PATH = os.path.join(BASE_DIR, "data.json")
 
 BUDGET = int(os.environ.get("STEAM_BUDGET", "100"))
 STEAM_DELAY = float(os.environ.get("STEAM_DELAY", "3.0"))
-BUDGET_SEC = int(os.environ.get("SCAN_BUDGET_SEC", "700"))  # жсткий лимит скана, сек
+BUDGET_SEC = int(os.environ.get("SCAN_BUDGET_SEC", "700"))  # жёсткий лимит скана, сек
 FAIL_COOLDOWN = 3600
 CACHE_TTL = 30 * 86400
 
@@ -61,8 +61,7 @@ def candidates(cache, catalog):
     prio = set(PRIORITY_ITEMS)
     cands = []
     for name, it in catalog.items():
-        if not (P
-RICE_MIN <= it["min_price"] <= PRICE_MAX):
+        if not (PRICE_MIN <= it["min_price"] <= PRICE_MAX):
             continue
         c = cache.get(name)
         if c:
@@ -120,8 +119,7 @@ def main():
             if consec429 >= 5:
                 print("STOP: Steam лимитирует подряд — выхожу с частичными данными", flush=True)
                 break
-            time.
-sleep(45)
+            time.sleep(45)
             continue
         except Exception as e:
             fails += 1
@@ -175,8 +173,7 @@ sleep(45)
         if ok:
             passing += 1
     deals.sort(key=lambda d: -d["roi"])
-    deals = deals[:DE
-ALS_LIMIT]
+    deals = deals[:DEALS_LIMIT]
 
     data = {
         "updated": now_iso(), "updated_ts": int(now),
