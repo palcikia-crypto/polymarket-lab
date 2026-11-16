@@ -1,6 +1,6 @@
-"""Восстановление state.json: v3. Достаёт cash + открытые позиции даже из
+"""Восстановление state.json: v3.1. Достаёт cash + открытые позиции даже из
 обрезанного файла (баланс скобок). История закрытых сделок, увы, не восстановится."""
-import json, os, re, subprocess, traceback
+import json, os, re, subprocess, time, traceback
 
 CUR = "results/state.json"
 LOG = "results/recover_log.txt"
@@ -14,7 +14,6 @@ def raw_json(text):
         return None
 
 def balanced_fragment(txt, start):
-    """txt[start] == '{' -> возвращает сбалансированный {...} фрагмент."""
     depth = 0
     in_str = False
     esc = False
@@ -34,7 +33,6 @@ def balanced_fragment(txt, start):
     return None
 
 def salvage(txt):
-    """Достаёт cash и positions из возможно обрезанного JSON."""
     st = {}
     m = re.search(r'"cash"\s*:\s*([0-9.]+)', txt)
     if m: st["cash"] = float(m.group(1))
