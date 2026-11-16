@@ -1,0 +1,11 @@
+{
+ "updated": "2026-11-16T02:45:40Z",
+ "errors": {
+  "btc-up-or-down-5m": "HTTPError: HTTP Error 406: Not Acceptable",
+  "btc-up-or-down-15m": "HTTPError: HTTP Error 406: Not Acceptable",
+  "btc-up-or-down-1h": "HTTPError: HTTP Error 406: Not Acceptable",
+  "eth-up-or-down-5m": "HTTPError: HTTP Error 406: Not Acceptable",
+  "eth-up-or-down-15m": "HTTPError: HTTP Error 406: Not Acceptable",
+  "sol-up-or-down-5m": "HTTPError: HTTP Error 406: Not Acceptable"
+ }
+}
