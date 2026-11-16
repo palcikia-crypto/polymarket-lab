@@ -19,7 +19,7 @@
    "outcome": "No",
    "strategy": "fav",
    "entry": 0.915,
-   "last": 0.9825,
+   "last": 0.9835,
    "shares": 54.56,
    "usd": 49.98,
    "opened": "2026-11-08T02:29:10Z",
@@ -96,6 +96,10 @@
   [
    "2026-11-16T02:41:04Z",
    4739.52
+  ],
+  [
+   "2026-11-16T02:42:52Z",
+   4739.58
   ]
  ],
  "done_keys": {},
@@ -121,17 +125,17 @@
    "tag": "sht5"
   }
  ],
- "runs": 9,
+ "runs": 10,
  "stats": {
-  "equity": 4739.52,
+  "equity": 4739.58,
   "cash": 4637.95,
   "open": 2,
   "trades": 5,
   "wins": 4,
   "winrate": 80.0,
-  "pnl_pct": 373.95,
-  "updated": "2026-11-16T02:41:04Z",
-  "runs": 9,
+  "pnl_pct": 373.96,
+  "updated": "2026-11-16T02:42:52Z",
+  "runs": 10,
   "sht_open": 0,
   "sht_trades": 4,
   "sht_pnl": 1348.59
