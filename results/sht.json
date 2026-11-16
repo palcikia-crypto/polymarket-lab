@@ -1,10 +1,59 @@
 {
- "updated": "2026-11-16T02:40:31Z",
+ "updated": "2026-11-16T02:41:04Z",
  "live": [],
  "cal": {
-  "n": 0,
-  "brier": null,
-  "acc": null
+  "n": 4,
+  "brier": 0.4529,
+  "acc": 100.0
  },
- "settled": []
+ "settled": [
+  {
+   "question": "Solana Up or Down - November 10, 12:50PM-12:55PM ET",
+   "slug": "sol-updown-5m-1794333000",
+   "outcome": "Down",
+   "entry": 0.125,
+   "exit": 1.0,
+   "ret_pct": 300.0,
+   "strategy": "sht5",
+   "opened": "2026-11-10T17:51:22Z",
+   "closed": "2026-11-16T02:41:01Z",
+   "reason": "нет данных расчёта, выигрыш"
+  },
+  {
+   "question": "Ethereum Up or Down - November 10, 12:45PM-1:00PM ET",
+   "slug": "eth-updown-15m-1794332700",
+   "outcome": "Down",
+   "entry": 0.15,
+   "exit": 1.0,
+   "ret_pct": 233.33,
+   "strategy": "sht15",
+   "opened": "2026-11-10T17:51:22Z",
+   "closed": "2026-11-16T02:41:01Z",
+   "reason": "нет данных расчёта, выигрыш"
+  },
+  {
+   "question": "Ethereum Up or Down - November 10, 12:50PM-12:55PM ET",
+   "slug": "eth-updown-5m-1794333000",
+   "outcome": "Down",
+   "entry": 0.2,
+   "exit": 1.0,
+   "ret_pct": 150.0,
+   "strategy": "sht5",
+   "opened": "2026-11-10T17:51:22Z",
+   "closed": "2026-11-16T02:41:01Z",
+   "reason": "нет данных расчёта, выигрыш"
+  },
+  {
+   "question": "Bitcoin Up or Down - November 10, 12:50PM-12:55PM ET",
+   "slug": "btc-updown-5m-1794333000",
+   "outcome": "Down",
+   "entry": 0.24,
+   "exit": 1.0,
+   "ret_pct": 108.33,
+   "strategy": "sht5",
+   "opened": "2026-11-10T17:51:22Z",
+   "closed": "2026-11-16T02:41:01Z",
+   "reason": "нет данных расчёта, выигрыш"
+  }
+ ]
 }

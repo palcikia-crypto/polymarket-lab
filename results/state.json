@@ -1,60 +1,139 @@
 {
- "cash": 1000.0,
- "positions": {},
- "closed": [],
+ "cash": 4637.953426834942,
+ "positions": {
+  "will-bitcoin-dip-to-62pt5k-in-november-2026": {
+   "question": "Will Bitcoin dip to $62,500 in November?",
+   "slug": "will-bitcoin-dip-to-62pt5k-in-november-2026",
+   "outcome": "No",
+   "strategy": "fav",
+   "entry": 0.88,
+   "last": 0.845,
+   "shares": 56.76,
+   "usd": 50,
+   "opened": "2026-11-08T01:16:14Z",
+   "epoch": 1794100574.658789
+  },
+  "will-bitcoin-reach-90k-in-november-2026": {
+   "question": "Will Bitcoin reach $90,000 in November?",
+   "slug": "will-bitcoin-reach-90k-in-november-2026",
+   "outcome": "No",
+   "strategy": "fav",
+   "entry": 0.915,
+   "last": 0.9825,
+   "shares": 54.56,
+   "usd": 49.98,
+   "opened": "2026-11-08T02:29:10Z",
+   "epoch": 1794104950.605626
+  }
+ },
+ "closed": [
+  {
+   "question": "Bitcoin Up or Down - November 10, 12:50PM-12:55PM ET",
+   "slug": "btc-updown-5m-1794333000",
+   "outcome": "Down",
+   "entry": 0.24,
+   "exit": 1.0,
+   "ret_pct": 108.33,
+   "strategy": "sht5",
+   "opened": "2026-11-10T17:51:22Z",
+   "closed": "2026-11-16T02:41:01Z",
+   "reason": "нет данных расчёта, выигрыш"
+  },
+  {
+   "question": "Ethereum Up or Down - November 10, 12:50PM-12:55PM ET",
+   "slug": "eth-updown-5m-1794333000",
+   "outcome": "Down",
+   "entry": 0.2,
+   "exit": 1.0,
+   "ret_pct": 150.0,
+   "strategy": "sht5",
+   "opened": "2026-11-10T17:51:22Z",
+   "closed": "2026-11-16T02:41:01Z",
+   "reason": "нет данных расчёта, выигрыш"
+  },
+  {
+   "question": "Ethereum Up or Down - November 10, 12:45PM-1:00PM ET",
+   "slug": "eth-updown-15m-1794332700",
+   "outcome": "Down",
+   "entry": 0.15,
+   "exit": 1.0,
+   "ret_pct": 233.33,
+   "strategy": "sht15",
+   "opened": "2026-11-10T17:51:22Z",
+   "closed": "2026-11-16T02:41:01Z",
+   "reason": "нет данных расчёта, выигрыш"
+  },
+  {
+   "question": "Solana Up or Down - November 10, 12:50PM-12:55PM ET",
+   "slug": "sol-updown-5m-1794333000",
+   "outcome": "Down",
+   "entry": 0.125,
+   "exit": 1.0,
+   "ret_pct": 300.0,
+   "strategy": "sht5",
+   "opened": "2026-11-10T17:51:22Z",
+   "closed": "2026-11-16T02:41:01Z",
+   "reason": "нет данных расчёта, выигрыш"
+  },
+  {
+   "question": "Will Bitcoin dip to $60,000 in November?",
+   "slug": "will-bitcoin-dip-to-60k-in-november-2026",
+   "outcome": "No",
+   "entry": 0.925,
+   "exit": 0.625,
+   "ret_pct": -32.63,
+   "strategy": "fav",
+   "opened": "2026-11-08T01:16:14Z",
+   "closed": "2026-11-16T02:41:02Z",
+   "reason": "стоп-лосс -10%"
+  }
+ ],
  "curve": [
   [
-   "2026-11-16T02:32:42Z",
-   1000.0
+   "2026-11-16T02:40:54Z",
+   2576.28
   ],
   [
-   "2026-11-16T02:32:45Z",
-   1000.0
-  ],
-  [
-   "2026-11-16T02:33:52Z",
-   1000.0
-  ],
-  [
-   "2026-11-16T02:34:40Z",
-   1000.0
-  ],
-  [
-   "2026-11-16T02:35:37Z",
-   1000.0
-  ],
-  [
-   "2026-11-16T02:37:10Z",
-   1000.0
-  ],
-  [
-   "2026-11-16T02:38:08Z",
-   1000.0
-  ],
-  [
-   "2026-11-16T02:39:45Z",
-   1000.0
-  ],
-  [
-   "2026-11-16T02:40:31Z",
-   1000.0
+   "2026-11-16T02:41:04Z",
+   4739.52
   ]
  ],
- "runs": 8,
  "done_keys": {},
- "cal": [],
+ "cal": [
+  {
+   "p": 0.3357,
+   "win": 1,
+   "tag": "sht5"
+  },
+  {
+   "p": 0.3995,
+   "win": 1,
+   "tag": "sht5"
+  },
+  {
+   "p": 0.2111,
+   "win": 1,
+   "tag": "sht15"
+  },
+  {
+   "p": 0.3775,
+   "win": 1,
+   "tag": "sht5"
+  }
+ ],
+ "runs": 9,
  "stats": {
-  "equity": 1000.0,
-  "cash": 1000.0,
-  "open": 0,
-  "trades": 0,
-  "wins": 0,
-  "winrate": 0.0,
-  "pnl_pct": 0.0,
-  "updated": "2026-11-16T02:40:31Z",
-  "runs": 8,
+  "equity": 4739.52,
+  "cash": 4637.95,
+  "open": 2,
+  "trades": 5,
+  "wins": 4,
+  "winrate": 80.0,
+  "pnl_pct": 373.95,
+  "updated": "2026-11-16T02:41:04Z",
+  "runs": 9,
   "sht_open": 0,
-  "sht_trades": 0,
-  "sht_pnl": 0
+  "sht_trades": 4,
+  "sht_pnl": 1348.59
  }
 }

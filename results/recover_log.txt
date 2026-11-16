@@ -1,4 +1,5 @@
-commits: 9
+commits: 10
+b7aeaf93 len=755 src=full score=0.09
 07a09592 len=709 src=full score=0.08
 00692f00 len=663 src=full score=0.07
 0e21f705 len=617 src=full score=0.06
@@ -8,10 +9,5 @@ ba435c34 len=479 src=full score=0.03
 fc8709ee len=433 src=full score=0.02
 daedcbe9 len=32793 src=salvage score=7.0
 fda7d9bf len=91 src=salvage score=-1
-best=7.0 cur=0.08
-Traceback (most recent call last):
-  File "/home/runner/work/polymarket-lab/polymarket-lab/autolab/recover_state.py", line 93, in main
-    merged.setdefault("curve", [[time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), round(merged.get("cash", 1000.0), 2)]])
-                                 ^^^^
-NameError: name 'time' is not defined
-
+best=7.0 cur=0.09
+RESTORED from ('daedcbe9', 'salvage') cash=2576.28 positions=7
