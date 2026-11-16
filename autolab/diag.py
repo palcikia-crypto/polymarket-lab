@@ -62,13 +62,36 @@ def main():
         rh.pop("_body", None)
         p.append(rh)
 
-    r3 = probe(GAMMA + "/events?series_slug=btc-up-or-down-5m&closed=false&limit=3&order=endDate&ascending=true")
-    r3.pop("_body", None)
-    p.append(r3)
-
     r4 = probe(BIN + "?symbol=BTCUSDT&interval=1m&limit=5")
     r4.pop("_body", None)
     p.append(r4)
+
+    # серия Up or Down: свежие первыми, смотрим что реально возвращается
+    r6 = probe(GAMMA + "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5&order=endDate&ascending=false")
+    if r6.get("ok"):
+        try:
+            evs = json.loads(r6["_body"])
+            res["sht_newest"] = []
+            for e in (evs or [])[:5]:
+                src = e if e.get("outcomePrices") else (e.get("markets") or [{}])[0]
+                res["sht_newest"].append({"slug": e.get("slug"), "endDate": e.get("endDate"),
+                                          "closed": e.get("closed"), "active": e.get("active"),
+                                          "outcomePrices": src.get("outcomePrices")})
+        except Exception as e:
+            res["sht_newest_error"] = str(e)
+    r6.pop("_body", None)
+    p.append(r6)
+
+    r7 = probe(GAMMA + "/public-search?q=Bitcoin%20Up%20or%20Down&limit_per_type=5")
+    if r7.get("ok"):
+        try:
+            ps = json.loads(r7["_body"])
+            evs = (ps.get("events") or [])[:5]
+            res["search_events"] = [{"slug": e.get("slug"), "endDate": e.get("endDate"), "closed": e.get("closed")} for e in evs]
+        except Exception as e:
+            res["search_error"] = str(e)
+    r7.pop("_body", None)
+    p.append(r7)
 
     if tokens and isinstance(tokens, list) and tokens:
         rb = probe(CLOB + "/book?token_id=" + str(tokens[0]))
