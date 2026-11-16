@@ -1,5 +1,5 @@
 {
- "cash": 4308.146635619215,
+ "cash": 4659.449980619215,
  "positions": {
   "will-bitcoin-dip-to-62pt5k-in-november-2026": {
    "question": "Will Bitcoin dip to $62,500 in November?",
@@ -19,27 +19,11 @@
    "outcome": "No",
    "strategy": "fav",
    "entry": 0.915,
-   "last": 0.985,
+   "last": 0.9885,
    "shares": 54.56,
    "usd": 49.98,
    "opened": "2026-11-08T02:29:10Z",
    "epoch": 1794104950.605626
-  },
-  "btc-updown-15m-1794811500": {
-   "kind": "sht",
-   "slug": "btc-updown-15m-1794811500",
-   "question": "Bitcoin Up or Down - November 16, 1:45AM-2:00AM ET",
-   "series": "btc-updown-15m",
-   "outcome": "Down",
-   "strategy": "sht15",
-   "entry": 0.33,
-   "last": 0.33,
-   "shares": 703.31,
-   "usd": 232.09,
-   "opened": "2026-11-16T06:49:48Z",
-   "epoch": 1794811788.6961076,
-   "end_ts": 1794812400,
-   "fair_up": 0.6145
   }
  },
  "closed": [
@@ -138,6 +122,18 @@
    "opened": "2026-11-16T02:47:38Z",
    "closed": "2026-11-16T06:49:39Z",
    "reason": "нет данных расчёта, выигрыш"
+  },
+  {
+   "question": "Bitcoin Up or Down - November 16, 1:45AM-2:00AM ET",
+   "slug": "btc-updown-15m-1794811500",
+   "outcome": "Down",
+   "entry": 0.33,
+   "exit": 1.0,
+   "ret_pct": 51.52,
+   "strategy": "sht15",
+   "opened": "2026-11-16T06:49:48Z",
+   "closed": "2026-11-16T16:30:35Z",
+   "reason": "нет данных расчёта, выигрыш"
   }
  ],
  "curve": [
@@ -164,6 +160,10 @@
   [
    "2026-11-16T06:49:53Z",
    4641.94
+  ],
+  [
+   "2026-11-16T16:30:43Z",
+   4761.34
   ]
  ],
  "done_keys": {},
@@ -202,21 +202,26 @@
    "p": 0.8438,
    "win": 1,
    "tag": "sht5"
+  },
+  {
+   "p": 0.3855,
+   "win": 1,
+   "tag": "sht15"
   }
  ],
- "runs": 13,
+ "runs": 14,
  "stats": {
-  "equity": 4641.94,
-  "cash": 4308.15,
-  "open": 3,
-  "trades": 8,
-  "wins": 4,
-  "winrate": 50.0,
-  "pnl_pct": 364.19,
-  "updated": "2026-11-16T06:49:53Z",
-  "runs": 13,
-  "sht_open": 1,
-  "sht_trades": 7,
-  "sht_pnl": 1251.48
+  "equity": 4761.34,
+  "cash": 4659.45,
+  "open": 2,
+  "trades": 9,
+  "wins": 5,
+  "winrate": 55.6,
+  "pnl_pct": 376.13,
+  "updated": "2026-11-16T16:30:43Z",
+  "runs": 14,
+  "sht_open": 0,
+  "sht_trades": 8,
+  "sht_pnl": 1371.05
  }
 }
