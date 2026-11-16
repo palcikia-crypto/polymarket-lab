@@ -1,6 +1,6 @@
-"""Восстановление state.json из git-истории: перебирает все версии файла,
-берёт самую полную валидную. Лог: results/recover_log.txt."""
-import json, os, subprocess, traceback
+"""Восстановление state.json: v3. Достаёт cash + открытые позиции даже из
+обрезанного файла (баланс скобок). История закрытых сделок, увы, не восстановится."""
+import json, os, re, subprocess, traceback
 
 CUR = "results/state.json"
 LOG = "results/recover_log.txt"
@@ -13,6 +13,44 @@ def raw_json(text):
     except Exception:
         return None
 
+def balanced_fragment(txt, start):
+    """txt[start] == '{' -> возвращает сбалансированный {...} фрагмент."""
+    depth = 0
+    in_str = False
+    esc = False
+    for i in range(start, len(txt)):
+        ch = txt[i]
+        if in_str:
+            if esc: esc = False
+            elif ch == "\\": esc = True
+            elif ch == '"': in_str = False
+            continue
+        if ch == '"': in_str = True
+        elif ch == '{': depth += 1
+        elif ch == '}':
+            depth -= 1
+            if depth == 0:
+                return txt[start:i + 1]
+    return None
+
+def salvage(txt):
+    """Достаёт cash и positions из возможно обрезанного JSON."""
+    st = {}
+    m = re.search(r'"cash"\s*:\s*([0-9.]+)', txt)
+    if m: st["cash"] = float(m.group(1))
+    i = txt.find('"positions"')
+    if i >= 0:
+        j = txt.find('{', i)
+        frag = balanced_fragment(txt, j) if j >= 0 else None
+        if frag:
+            try:
+                pos = json.loads(frag)
+                if isinstance(pos, dict):
+                    st["positions"] = pos
+            except Exception:
+                pass
+    return st if ("cash" in st or "positions" in st) else None
+
 def score(st):
     if not isinstance(st, dict): return -1
     if not isinstance(st.get("cash"), (int, float)) or not isinstance(st.get("positions"), dict): return -1
@@ -23,38 +61,44 @@ def main():
     try:
         shas = subprocess.run(["git", "log", "--format=%H", "--", PATH],
                               capture_output=True, text=True, timeout=60).stdout.split()
-        lines.append("commits touching %s: %d" % (PATH, len(shas)))
-        best, best_sha, best_sc = None, None, -1
+        lines.append("commits: %d" % len(shas))
+        best, best_sc, best_src = None, -1, None
         for sha in shas:
             try:
                 r = subprocess.run(["git", "show", "%s:%s" % (sha, PATH)],
                                    capture_output=True, text=True, timeout=30)
                 if r.returncode != 0: continue
-                st = raw_json(r.stdout)
+                txt = r.stdout
+                st = raw_json(txt)
+                src = "full"
+                if st is None:
+                    st = salvage(txt)
+                    src = "salvage"
                 sc = score(st)
-                lines.append("%s len=%d score=%s" % (sha[:8], len(r.stdout), sc))
+                lines.append("%s len=%d src=%s score=%s" % (sha[:8], len(txt), src, sc))
                 if sc > best_sc:
-                    best, best_sha, best_sc = st, sha, sc
+                    best, best_sc, best_src = st, sc, (sha[:8], src)
             except Exception as e:
                 lines.append("%s error %s" % (sha[:8], e))
-        cur_sc = -1
-        cur = None
+        cur, cur_sc = None, -1
         if os.path.exists(CUR):
             try:
                 with open(CUR) as f: cur = json.load(f)
                 cur_sc = score(cur)
             except Exception: pass
-        lines.append("best=%s score=%s cur_score=%s" % (best_sha, best_sc, cur_sc))
+        lines.append("best=%s cur=%s" % (best_sc, cur_sc))
         if best is not None and best_sc > cur_sc:
             merged = dict(best)
+            merged.setdefault("closed", [])
+            merged.setdefault("curve", [[time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), round(merged.get("cash", 1000.0), 2)]])
+            merged.setdefault("done_keys", {})
+            merged.setdefault("cal", [])
             if cur is not None and cur_sc >= 0:
                 merged["runs"] = int(best.get("runs", 0)) + int(cur.get("runs", 0))
-                oc = best.get("curve") or []
-                merged["curve"] = (list(oc) + [x for x in (cur.get("curve") or []) if x not in oc])[-1500:]
             with open(CUR, "w") as f:
                 json.dump(merged, f, ensure_ascii=False, indent=1)
-            lines.append("RESTORED from %s cash=%.2f positions=%d closed=%d" % (
-                best_sha[:8], merged["cash"], len(merged.get("positions") or {}), len(merged.get("closed") or [])))
+            lines.append("RESTORED from %s cash=%.2f positions=%d" % (
+                best_src, merged.get("cash", 0), len(merged.get("positions") or {})))
         else:
             lines.append("текущий не хуже - не трогаю")
     except Exception:
