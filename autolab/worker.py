@@ -1,10 +1,10 @@
-"""Polymarket Lab worker v3.1 (+ лог снимков живых окон для лаборатории).
+"""Polymarket Lab worker v3.2 (+ лог снимков живых окон для лаборатории).
 Классические эджи (tag 21) + бинарный движок 5m/15m/1h "Up or Down":
 справедливая вероятность из живой цены Binance, старта окна и волатильности.
 Запуск каждые 5 минут. Без зависимостей.
 Риск-фильтры v2 (по диагностированному механизму проигрышей - базис Binance/Chainlink
 в концовке окна): без лонгшотов дешевле 0.10, без входа в последние 90 секунд.
-v3.1 (2026-11-16): починен IndentationError в days_left (воркер молча не работал с 10.11),
+v3.2 (2026-11-16): починен IndentationError в days_left (воркер молча не работал с 10.11),
 hist() с запасным endpoint (prices-history начал отдавать 404), стрик-стратегия
 торгует только при явном подтверждении лаборатории (status начинается с "GO").
 """
@@ -41,8 +41,13 @@ def fetch(url, timeout=12):
         return json.loads(r.read().decode("utf-8", "replace"))
 
 def jload(path, default):
+    # v3.2: толерантно к мусору после JSON (урок битого state.json)
     try:
-        with open(path) as f: return json.load(f)
+        with open(path) as f: txt = f.read()
+        try: return json.loads(txt)
+        except Exception:
+            obj, _ = json.JSONDecoder().raw_decode(txt.lstrip())
+            return obj
     except Exception: return default
 
 def jsave(path, obj):
@@ -197,7 +202,8 @@ def sht_scan():
     for series_slug, sym, win_s, tag in SERIES:
         if time.time() > T0 + BUDGET_S * 0.75: break
         try:
-            evs = fetch(GAMMA + "/events?series_slug=" + series_slug + "&closed=false&limit=60&order=endDate&ascending=true", 12)
+            # v3.2: ascending=false - свежие окна первыми (старых незакрытых событий накопилось > лимита)
+            evs = fetch(GAMMA + "/events?series_slug=" + series_slug + "&closed=false&limit=60&order=endDate&ascending=false", 12)
         except Exception:
             continue
         if not isinstance(evs, list): continue
@@ -457,7 +463,7 @@ def main():
     jsave(ST["sht"], {"updated": now(), "live": live[:14],
         "cal": {"n": len(cal), "brier": brier, "acc": acc},
         "settled": settled_sht})
-    print("pm-lab v3.1: markets %d, windows %d, live %d, sht_open %d, equity %.2f" % (
+    print("pm-lab v3.2: markets %d, windows %d, live %d, sht_open %d, equity %.2f" % (
         len(ms), len(windows), len(live), st["stats"]["sht_open"], eq))
 
 if __name__ == "__main__":

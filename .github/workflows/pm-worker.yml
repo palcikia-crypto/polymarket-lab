@@ -17,9 +17,14 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Recover state from history (one-shot)
+        run: |
+          git show 798ded986ea8bc332ff586b52d171f546af07db0:results/state.json > results/old_state.json 2>/dev/null || rm -f results/old_state.json
+          python autolab/recover_state.py || true
       - name: Diag API
         run: timeout 60 python autolab/diag.py 2> results/diag_err.txt || true
       - name: Scan + paper trade
