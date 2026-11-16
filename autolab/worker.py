@@ -1,12 +1,12 @@
-"""Polymarket Lab worker v3.4 (+ лог ошибок sht_scan, exit 0).
+"""Polymarket Lab worker v3.5 (окна через /markets?slug, обход WAF-бана /events).
 Классические эджи (tag 21) + бинарный движок 5m/15m/1h "Up or Down":
 справедливая вероятность из живой цены Binance, старта окна и волатильности.
 Запуск каждые 5 минут. Без зависимостей.
-v3.3 (2026-11-16): sht_scan первым (WAF лимитит частые запросы), fetch с ретрями.
-v3.4: ошибки каждой серии sht_scan пишутся в results/sht_errors.json (раньше except
-глотал причину 406 молча); любые ошибки пишутся в crash-файл, но exit code всегда 0,
-чтобы workflow не помечал прогон упавшим.
-История: v3.1 фикс IndentationError (воркер молча не работал с 10.11), v3.2 толерантный jload.
+v3.5 (2026-11-16): /events?series_slug= стабильно отдаёт 406 (WAF лимитит айпи раннеров),
+а /markets работает. Слаги окон предсказуемы: <prefix>-<epoch старта окна>, поэтому
+сканируем окна прямым перебором слагов через /markets?slug=.
+История: v3.1 фикс IndentationError, v3.2 толерантный jload, v3.3 ретраи,
+v3.4 лог ошибок sht_scan + exit 0.
 """
 import json, math, os, re, sys, time, traceback, urllib.request, urllib.error
 
@@ -20,13 +20,14 @@ FEE = 0.002
 BUDGET_S = 200
 T0 = time.time()
 
+# (префикс слага окна, символ, длина окна сек, тег стратегии)
 SERIES = [
-    ("btc-up-or-down-5m", "BTCUSDT", 300, "sht5"),
-    ("btc-up-or-down-15m", "BTCUSDT", 900, "sht15"),
-    ("btc-up-or-down-1h", "BTCUSDT", 3600, "sht1h"),
-    ("eth-up-or-down-5m", "ETHUSDT", 300, "sht5"),
-    ("eth-up-or-down-15m", "ETHUSDT", 900, "sht15"),
-    ("sol-up-or-down-5m", "SOLUSDT", 300, "sht5"),
+    ("btc-updown-5m", "BTCUSDT", 300, "sht5"),
+    ("btc-updown-15m", "BTCUSDT", 900, "sht15"),
+    ("btc-updown-1h", "BTCUSDT", 3600, "sht1h"),
+    ("eth-updown-5m", "ETHUSDT", 300, "sht5"),
+    ("eth-updown-15m", "ETHUSDT", 900, "sht15"),
+    ("sol-updown-5m", "SOLUSDT", 300, "sht5"),
 ]
 MAX_SHT_POS = 4
 SHT_EDGE_MIN = 0.05
@@ -212,41 +213,40 @@ def sigma_m(kl):
     return math.sqrt(var) or 1e-9
 
 def sht_scan():
+    """Окна через /markets?slug=<prefix>-<epoch>: слаг окна строится из старта окна.
+    /events?series_slug= забанен WAF (406) - не используем."""
     kl_cache = {}
     windows = []
     errs = {}
+    probed = 0
     t_now = time.time()
-    for series_slug, sym, win_s, tag in SERIES:
-        if time.time() > T0 + BUDGET_S * 0.75: break
-        try:
-            evs = fetch(GAMMA + "/events?series_slug=" + series_slug + "&closed=false&limit=60&order=endDate&ascending=false", 12)
-        except Exception as e:
-            errs[series_slug] = "%s: %s" % (type(e).__name__, e)
-            continue
-        time.sleep(0.3)
-        if not isinstance(evs, list):
-            errs[series_slug] = "не список: %r" % (evs if not isinstance(evs, dict) else list(evs.keys()))
-            continue
-        for ev in evs:
+    for prefix, sym, win_s, tag in SERIES:
+        base = int(t_now // win_s) * win_s
+        for k in range(0, 2):
+            start = base + k * win_s
+            end = start + win_s
+            if end < t_now or start > t_now + 120: continue
+            slug = "%s-%d" % (prefix, start)
+            probed += 1
             try:
-                slug = ev.get("slug", "")
-                mm = re.search(r"(\d{9,})$", slug)
-                if not mm: continue
-                start = int(mm.group(1))
-                end = start + win_s
-                if end < t_now: continue
-                mkt = ev if ev.get("outcomePrices") else (ev.get("markets") or [{}])[0]
-                opp = mkt.get("outcomePrices")
-                if opp is None: continue
-                pr = [fnum(x) for x in plist(opp)]
+                mk = fetch(GAMMA + "/markets?slug=" + slug, 10, retries=1)
+            except Exception as e:
+                errs[slug] = "%s: %s" % (type(e).__name__, e)
+                continue
+            time.sleep(0.3)
+            if not isinstance(mk, list) or not mk: continue
+            m = mk[0]
+            try:
+                pr = [fnum(x) for x in plist(m.get("outcomePrices", "[]"))]
                 if len(pr) != 2 or pr[0] <= 0: continue
-                liq = fnum(mkt.get("liquidityNum") or mkt.get("liquidity") or ev.get("liquidity"))
-                windows.append({"series": series_slug, "tag": tag, "slug": slug,
-                    "title": (ev.get("title") or "")[:80], "sym": sym, "win_s": win_s,
-                    "start": start, "end": end, "p_up": pr[0], "p_down": pr[1], "liq": round(liq)})
+                liq = fnum(m.get("liquidityNum") or m.get("liquidity"))
+                windows.append({"series": prefix, "tag": tag, "slug": slug,
+                    "title": (m.get("question") or m.get("groupItemTitle") or slug)[:80],
+                    "sym": sym, "win_s": win_s,
+                    "start": start, "end": end, "p_up": pr[0], "p_down": pr[1],
+                    "liq": round(liq), "accepting": bool(m.get("acceptingOrders"))})
             except Exception: continue
-    if errs:
-        jsave("results/sht_errors.json", {"updated": now(), "errors": errs})
+    jsave("results/sht_errors.json", {"updated": now(), "probed": probed, "found": len(windows), "errors": errs})
     for w in windows:
         if w["start"] > time.time() + 900: continue
         kl = kl_cache.setdefault(w["sym"], klines(w["sym"]))
@@ -420,7 +420,6 @@ def lab_log(windows):
 def main():
     st = jload(ST["state"], {"cash": CASH0, "positions": {}, "closed": [], "curve": [[now(), CASH0]], "runs": 0, "done_keys": {}, "cal": []})
     settle_sht(st)
-    # бинарный движок первым - он основной и самый чувствительный к WAF-лимитам
     windows = sht_scan()
     sht_trade(st, windows)
     sht_trade_streaks(st, windows)
@@ -489,7 +488,7 @@ def main():
     jsave(ST["sht"], {"updated": now(), "live": live[:14],
         "cal": {"n": len(cal), "brier": brier, "acc": acc},
         "settled": settled_sht})
-    print("pm-lab v3.4: markets %d, windows %d, live %d, sht_open %d, equity %.2f" % (
+    print("pm-lab v3.5: markets %d, windows %d, live %d, sht_open %d, equity %.2f" % (
         len(ms), len(windows), len(live), st["stats"]["sht_open"], eq))
 
 if __name__ == "__main__":
@@ -499,5 +498,4 @@ if __name__ == "__main__":
         with open("results/worker_crash.txt", "w") as f:
             f.write(time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()) + "\n")
             f.write(traceback.format_exc())
-    # v3.4: всегда exit 0 - ошибка уже записана в crash-файл, не надо пугать workflow
     sys.exit(0)

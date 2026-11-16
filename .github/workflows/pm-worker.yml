@@ -26,7 +26,9 @@ jobs:
       - name: Diag API
         run: timeout 60 python autolab/diag.py 2> results/diag_err.txt || true
       - name: Scan + paper trade
-        run: timeout 300 python autolab/worker.py > results/worker_log.txt 2> results/worker_err.txt || echo "worker exit nonzero" > results/worker_flag.txt
+        run: |
+          rm -f results/worker_flag.txt
+          timeout 300 python autolab/worker.py > results/worker_log.txt 2> results/worker_err.txt || echo "worker exit nonzero" > results/worker_flag.txt
       - name: Commit results
         if: always()
         run: |
