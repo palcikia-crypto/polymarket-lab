@@ -1,40 +1,40 @@
 {
- "updated": "2026-11-16T02:31:24Z",
+ "updated": "2026-11-16T02:32:40Z",
  "probes": [
   {
    "url": "https://gamma-api.polymarket.com/markets?tag_id=21&closed=false&active=true&limit=3&order=volume24hr&ascending=false",
    "ok": true,
-   "ms": 219,
+   "ms": 123,
    "shape": "list[3]",
    "head": "[{\"id\":\"701502\",\"question\":\"Will Bitcoin dip to $45,000 by December 31, 2026?\",\"conditionId\":\"0x024b68f77bfc019341ee3db8f57c103334e4b9430bba4746d8c94aafd8b36fee\",\"slug\":\"will-bitcoin-dip-to-45000-by-december-31-2026-674-923-755-971-998-525-926-245-316-517-544-589-965-923-986-841-815-224-586-231-289-"
   },
   {
    "url": "https://gamma-api.polymarket.com/markets/701502/prices-history?interval=1w&fidelity=60",
    "ok": false,
-   "ms": 347,
+   "ms": 23,
    "error": "HTTP 404",
    "head": "404 page not found "
   },
   {
    "url": "https://gamma-api.polymarket.com/events?series_slug=btc-up-or-down-5m&closed=false&limit=3&order=endDate&ascending=true",
    "ok": true,
-   "ms": 147,
+   "ms": 24,
    "shape": "list[3]",
    "head": "[{\"id\":\"109968\",\"ticker\":\"btc-updown-5m-1766162100\",\"slug\":\"btc-updown-5m-1766162100\",\"title\":\"Bitcoin Up or Down - December 19, 11:35AM-11:40AM ET\",\"description\":\"This market will resolve to \\\"Up\\\" if the Bitcoin price at the end of the time range specified in the title is greater than or equal to "
   },
   {
    "url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1m&limit=5",
    "ok": true,
-   "ms": 581,
+   "ms": 663,
    "shape": "list[5]",
-   "head": "[[1794796020000,\"65270.01000000\",\"65311.97000000\",\"65248.89000000\",\"65311.96000000\",\"9.48193000\",1794796079999,\"618996.70974840\",4623,\"6.80687000\",\"444376.89823760\",\"0\"],[1794796080000,\"65311.96000000\",\"65352.01000000\",\"65284.00000000\",\"65336.00000000\",\"33.23062000\",1794796139999,\"2171348.97160010\","
+   "head": "[[1794796080000,\"65311.96000000\",\"65352.01000000\",\"65284.00000000\",\"65336.00000000\",\"33.23062000\",1794796139999,\"2171348.97160010\",6100,\"8.99039000\",\"587336.20407030\",\"0\"],[1794796140000,\"65336.01000000\",\"65349.36000000\",\"65201.76000000\",\"65207.50000000\",\"163.60867000\",1794796199999,\"10677433.518460"
   },
   {
    "url": "https://clob.polymarket.com/book?token_id=9894510651052373088408067031031513212801618531203062911959630395716258202132",
    "ok": true,
-   "ms": 160,
+   "ms": 110,
    "shape": "dict keys: market,asset_id,timestamp,hash,bids,asks,min_order_size,tick_size",
-   "head": "{\"market\":\"0x024b68f77bfc019341ee3db8f57c103334e4b9430bba4746d8c94aafd8b36fee\",\"asset_id\":\"9894510651052373088408067031031513212801618531203062911959630395716258202132\",\"timestamp\":\"1794796283036\",\"hash\":\"7f97c00aa8fbf181a812f7a7c5f1c344e18b138c\",\"bids\":[{\"price\":\"0.001\",\"size\":\"1308833.6\"},{\"price\""
+   "head": "{\"market\":\"0x024b68f77bfc019341ee3db8f57c103334e4b9430bba4746d8c94aafd8b36fee\",\"asset_id\":\"9894510651052373088408067031031513212801618531203062911959630395716258202132\",\"timestamp\":\"1794796359953\",\"hash\":\"de4e0548dc6450d718f679fa223ff8281946563f\",\"bids\":[{\"price\":\"0.001\",\"size\":\"1308833.6\"},{\"price\""
   }
  ],
  "sample_market": {
@@ -50,7 +50,7 @@
   "spread": 0.001,
   "gamma_price": "0.0845",
   "delta_ask_minus_gamma": 0.0005,
-  "bid_levels": 43,
-  "ask_levels": 120
+  "bid_levels": 44,
+  "ask_levels": 119
  }
 }
