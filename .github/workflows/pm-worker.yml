@@ -21,10 +21,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Recover state from history (one-shot)
-        run: |
-          git show 798ded986ea8bc332ff586b52d171f546af07db0:results/state.json > results/old_state.json 2>/dev/null || rm -f results/old_state.json
-          python autolab/recover_state.py || true
+      - name: Recover state from history
+        run: python autolab/recover_state.py || true
+      - name: Sht debug
+        run: timeout 90 python autolab/sht_debug.py 2> results/sht_debug_err.txt || true
       - name: Diag API
         run: timeout 60 python autolab/diag.py 2> results/diag_err.txt || true
       - name: Scan + paper trade
