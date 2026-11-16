@@ -1,9 +1,10 @@
-commits touching results/state.json: 6
+commits touching results/state.json: 7
+0e21f705 len=617 score=0.06
 2714b8bd len=571 score=0.05
 8ef48fda len=525 score=0.04
 ba435c34 len=479 score=0.03
 fc8709ee len=433 score=0.02
 daedcbe9 len=32793 score=-1
 fda7d9bf len=91 score=-1
-best=2714b8bd7630ba08ebae0b7843b651df17875919 score=0.05 cur_score=0.05
+best=0e21f7054f6fdec357f906d8feeaf8d8427075b1 score=0.06 cur_score=0.06
 текущий не хуже - не трогаю

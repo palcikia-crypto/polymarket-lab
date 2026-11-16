@@ -1,0 +1,42 @@
+{
+ "updated": "2026-11-16T02:38:02Z",
+ "now_ts": 1794796682,
+ "series": {
+  "btc-up-or-down-5m": {
+   "evs": 0,
+   "kept": 0,
+   "reject": {},
+   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  },
+  "btc-up-or-down-15m": {
+   "evs": 0,
+   "kept": 0,
+   "reject": {},
+   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  },
+  "btc-up-or-down-1h": {
+   "evs": 0,
+   "kept": 0,
+   "reject": {},
+   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  },
+  "eth-up-or-down-5m": {
+   "evs": 0,
+   "kept": 0,
+   "reject": {},
+   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  },
+  "eth-up-or-down-15m": {
+   "evs": 0,
+   "kept": 0,
+   "reject": {},
+   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  },
+  "sol-up-or-down-5m": {
+   "evs": 0,
+   "kept": 0,
+   "reject": {},
+   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  }
+ }
+}
