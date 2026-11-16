@@ -1,0 +1,4 @@
+old size=32793 head='{\n "cash": 2576.2821618349417,\n "positions": {\n  "will-bitco'
+raw_decode failed, retry до позиции 32567
+parsed=NoneType
+valid=False
