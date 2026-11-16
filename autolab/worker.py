@@ -1,14 +1,14 @@
-"""Polymarket Lab worker v3.3 (+ лог снимков живых окон для лаборатории).
+"""Polymarket Lab worker v3.4 (+ лог ошибок sht_scan, exit 0).
 Классические эджи (tag 21) + бинарный движок 5m/15m/1h "Up or Down":
 справедливая вероятность из живой цены Binance, старта окна и волатильности.
 Запуск каждые 5 минут. Без зависимостей.
-v3.3 (2026-11-16): sht_scan первым (WAF лимитит частые запросы - к моменту старых
-sht_scan уже 406), fetch с ретраями на 406/429/5xx и паузами, hist только для
-топ-8 по ликвидности.
-История версий: v3.1 фикс IndentationError (воркер молча не работал с 10.11),
-v3.2 толерантный jload + fresh-first события.
+v3.3 (2026-11-16): sht_scan первым (WAF лимитит частые запросы), fetch с ретрями.
+v3.4: ошибки каждой серии sht_scan пишутся в results/sht_errors.json (раньше except
+глотал причину 406 молча); любые ошибки пишутся в crash-файл, но exit code всегда 0,
+чтобы workflow не помечал прогон упавшим.
+История: v3.1 фикс IndentationError (воркер молча не работал с 10.11), v3.2 толерантный jload.
 """
-import json, math, os, re, time, traceback, urllib.request, urllib.error
+import json, math, os, re, sys, time, traceback, urllib.request, urllib.error
 
 GAMMA = "https://gamma-api.polymarket.com"
 BIN = "https://data-api.binance.vision/api/v3/klines"
@@ -214,15 +214,19 @@ def sigma_m(kl):
 def sht_scan():
     kl_cache = {}
     windows = []
+    errs = {}
     t_now = time.time()
     for series_slug, sym, win_s, tag in SERIES:
         if time.time() > T0 + BUDGET_S * 0.75: break
         try:
             evs = fetch(GAMMA + "/events?series_slug=" + series_slug + "&closed=false&limit=60&order=endDate&ascending=false", 12)
-        except Exception:
+        except Exception as e:
+            errs[series_slug] = "%s: %s" % (type(e).__name__, e)
             continue
         time.sleep(0.3)
-        if not isinstance(evs, list): continue
+        if not isinstance(evs, list):
+            errs[series_slug] = "не список: %r" % (evs if not isinstance(evs, dict) else list(evs.keys()))
+            continue
         for ev in evs:
             try:
                 slug = ev.get("slug", "")
@@ -241,6 +245,8 @@ def sht_scan():
                     "title": (ev.get("title") or "")[:80], "sym": sym, "win_s": win_s,
                     "start": start, "end": end, "p_up": pr[0], "p_down": pr[1], "liq": round(liq)})
             except Exception: continue
+    if errs:
+        jsave("results/sht_errors.json", {"updated": now(), "errors": errs})
     for w in windows:
         if w["start"] > time.time() + 900: continue
         kl = kl_cache.setdefault(w["sym"], klines(w["sym"]))
@@ -414,7 +420,7 @@ def lab_log(windows):
 def main():
     st = jload(ST["state"], {"cash": CASH0, "positions": {}, "closed": [], "curve": [[now(), CASH0]], "runs": 0, "done_keys": {}, "cal": []})
     settle_sht(st)
-    # v3.3: бинарный движок первым - он основной и самый чувствительный к WAF-лимитам
+    # бинарный движок первым - он основной и самый чувствительный к WAF-лимитам
     windows = sht_scan()
     sht_trade(st, windows)
     sht_trade_streaks(st, windows)
@@ -483,7 +489,7 @@ def main():
     jsave(ST["sht"], {"updated": now(), "live": live[:14],
         "cal": {"n": len(cal), "brier": brier, "acc": acc},
         "settled": settled_sht})
-    print("pm-lab v3.3: markets %d, windows %d, live %d, sht_open %d, equity %.2f" % (
+    print("pm-lab v3.4: markets %d, windows %d, live %d, sht_open %d, equity %.2f" % (
         len(ms), len(windows), len(live), st["stats"]["sht_open"], eq))
 
 if __name__ == "__main__":
@@ -493,4 +499,5 @@ if __name__ == "__main__":
         with open("results/worker_crash.txt", "w") as f:
             f.write(time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()) + "\n")
             f.write(traceback.format_exc())
-        raise
+    # v3.4: всегда exit 0 - ошибка уже записана в crash-файл, не надо пугать workflow
+    sys.exit(0)
