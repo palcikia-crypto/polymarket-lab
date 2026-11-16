@@ -1,42 +1,101 @@
 {
- "updated": "2026-11-16T02:39:39Z",
- "now_ts": 1794796779,
- "series": {
-  "btc-up-or-down-5m": {
-   "evs": 0,
-   "kept": 0,
-   "reject": {},
-   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+ "updated": "2026-11-16T02:40:19Z",
+ "variants": [
+  {
+   "ua": "pm-lab/2.0",
+   "url_tail": "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5&order=endDate&ascending=false",
+   "ok": true,
+   "n": 5,
+   "first_slug": "btc-updown-5m-1794882300",
+   "first_prices": "[\"0.505\", \"0.495\"]"
   },
-  "btc-up-or-down-15m": {
-   "evs": 0,
-   "kept": 0,
-   "reject": {},
-   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  {
+   "ua": "pm-lab/2.0",
+   "url_tail": "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5&order=endDate&ascending=true",
+   "ok": true,
+   "n": 5,
+   "first_slug": "btc-updown-5m-1766162100",
+   "first_prices": null
   },
-  "btc-up-or-down-1h": {
-   "evs": 0,
-   "kept": 0,
-   "reject": {},
-   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  {
+   "ua": "pm-lab/2.0",
+   "url_tail": "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5",
+   "ok": true,
+   "n": 5,
+   "first_slug": "btc-updown-5m-1766162100",
+   "first_prices": null
   },
-  "eth-up-or-down-5m": {
-   "evs": 0,
-   "kept": 0,
-   "reject": {},
-   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  {
+   "ua": "pm-lab/2.0",
+   "url_tail": "/events?slug=btc-updown-5m-1794882000",
+   "ok": true,
+   "n": 1,
+   "first_slug": "btc-updown-5m-1794882000",
+   "first_prices": "[\"0.505\", \"0.495\"]"
   },
-  "eth-up-or-down-15m": {
-   "evs": 0,
-   "kept": 0,
-   "reject": {},
-   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  {
+   "ua": "pm-lab-debug/1.0",
+   "url_tail": "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5&order=endDate&ascending=false",
+   "ok": true,
+   "n": 5,
+   "first_slug": "btc-updown-5m-1794882300",
+   "first_prices": "[\"0.505\", \"0.495\"]"
   },
-  "sol-up-or-down-5m": {
-   "evs": 0,
-   "kept": 0,
-   "reject": {},
-   "error": "HTTPError: HTTP Error 406: Not Acceptable"
+  {
+   "ua": "pm-lab-debug/1.0",
+   "url_tail": "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5&order=endDate&ascending=true",
+   "ok": true,
+   "n": 5,
+   "first_slug": "btc-updown-5m-1766162100",
+   "first_prices": null
+  },
+  {
+   "ua": "pm-lab-debug/1.0",
+   "url_tail": "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5",
+   "ok": true,
+   "n": 5,
+   "first_slug": "btc-updown-5m-1766162100",
+   "first_prices": null
+  },
+  {
+   "ua": "pm-lab-debug/1.0",
+   "url_tail": "/events?slug=btc-updown-5m-1794882000",
+   "ok": true,
+   "n": 1,
+   "first_slug": "btc-updown-5m-1794882000",
+   "first_prices": "[\"0.505\", \"0.495\"]"
+  },
+  {
+   "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+   "url_tail": "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5&order=endDate&ascending=false",
+   "ok": true,
+   "n": 5,
+   "first_slug": "btc-updown-5m-1794882300",
+   "first_prices": "[\"0.505\", \"0.495\"]"
+  },
+  {
+   "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+   "url_tail": "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5&order=endDate&ascending=true",
+   "ok": true,
+   "n": 5,
+   "first_slug": "btc-updown-5m-1766162100",
+   "first_prices": null
+  },
+  {
+   "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+   "url_tail": "/events?series_slug=btc-up-or-down-5m&closed=false&limit=5",
+   "ok": true,
+   "n": 5,
+   "first_slug": "btc-updown-5m-1766162100",
+   "first_prices": null
+  },
+  {
+   "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+   "url_tail": "/events?slug=btc-updown-5m-1794882000",
+   "ok": true,
+   "n": 1,
+   "first_slug": "btc-updown-5m-1794882000",
+   "first_prices": "[\"0.505\", \"0.495\"]"
   }
- }
+ ]
 }
