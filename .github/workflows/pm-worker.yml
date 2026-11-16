@@ -23,8 +23,6 @@ jobs:
           python-version: "3.11"
       - name: Recover state from history
         run: python autolab/recover_state.py || true
-      - name: Sht debug
-        run: timeout 90 python autolab/sht_debug.py 2> results/sht_debug_err.txt || true
       - name: Diag API
         run: timeout 60 python autolab/diag.py 2> results/diag_err.txt || true
       - name: Scan + paper trade

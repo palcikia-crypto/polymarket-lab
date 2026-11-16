@@ -1,21 +1,21 @@
-"""Polymarket Lab worker v3.2 (+ лог снимков живых окон для лаборатории).
+"""Polymarket Lab worker v3.3 (+ лог снимков живых окон для лаборатории).
 Классические эджи (tag 21) + бинарный движок 5m/15m/1h "Up or Down":
 справедливая вероятность из живой цены Binance, старта окна и волатильности.
 Запуск каждые 5 минут. Без зависимостей.
-Риск-фильтры v2 (по диагностированному механизму проигрышей - базис Binance/Chainlink
-в концовке окна): без лонгшотов дешевле 0.10, без входа в последние 90 секунд.
-v3.2 (2026-11-16): починен IndentationError в days_left (воркер молча не работал с 10.11),
-hist() с запасным endpoint (prices-history начал отдавать 404), стрик-стратегия
-торгует только при явном подтверждении лаборатории (status начинается с "GO").
+v3.3 (2026-11-16): sht_scan первым (WAF лимитит частые запросы - к моменту старых
+sht_scan уже 406), fetch с ретраями на 406/429/5xx и паузами, hist только для
+топ-8 по ликвидности.
+История версий: v3.1 фикс IndentationError (воркер молча не работал с 10.11),
+v3.2 толерантный jload + fresh-first события.
 """
-import json, math, os, re, time, traceback, urllib.request
+import json, math, os, re, time, traceback, urllib.request, urllib.error
 
 GAMMA = "https://gamma-api.polymarket.com"
 BIN = "https://data-api.binance.vision/api/v3/klines"
 ST = {"state": "results/state.json", "signals": "results/signals.json", "scan": "results/scan.json", "sht": "results/sht.json", "lab": "results/sht_lab.json"}
 CASH0 = 1000.0
 MAX_POS = 6
-HIST_TOP = 12
+HIST_TOP = 8
 FEE = 0.002
 BUDGET_S = 200
 T0 = time.time()
@@ -35,13 +35,28 @@ SHT_MIN_LIQ = 300.0
 def now():
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
-def fetch(url, timeout=12):
-    req = urllib.request.Request(url, headers={"User-Agent": "pm-lab/2.0"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode("utf-8", "replace"))
+def fetch(url, timeout=12, retries=2):
+    last = None
+    for attempt in range(retries + 1):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "pm-lab/2.0", "Accept": "application/json"})
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read().decode("utf-8", "replace"))
+        except urllib.error.HTTPError as e:
+            last = e
+            if e.code in (406, 429, 500, 502, 503) and attempt < retries:
+                time.sleep(2.0 + attempt * 2.0)
+                continue
+            raise
+        except Exception as e:
+            last = e
+            if attempt < retries:
+                time.sleep(1.5)
+                continue
+            raise
+    raise last
 
 def jload(path, default):
-    # v3.2: толерантно к мусору после JSON (урок битого state.json)
     try:
         with open(path) as f: txt = f.read()
         try: return json.loads(txt)
@@ -70,6 +85,7 @@ def scan():
         url = (GAMMA + "/markets?tag_id=21&closed=false&active=true&limit=100&offset=%d" % off) + "&order=volume24hr&ascending=false"
         try: batch = fetch(url, 12)
         except Exception: break
+        time.sleep(0.3)
         if not isinstance(batch, list) or not batch: break
         ms.extend(batch)
         if len(batch) < 100: break
@@ -92,16 +108,16 @@ def scan():
     return out
 
 def hist(mid):
-    # 2026-11: /markets/{id}/prices-history начал отдавать 404 - пробуем оба варианта
     urls = [
         GAMMA + "/markets/%s/prices-history?interval=1w&fidelity=60" % mid,
         GAMMA + "/prices-history?market=%s&interval=1w&fidelity=60" % mid,
     ]
     for url in urls:
         try:
-            d = fetch(url, 8)
+            d = fetch(url, 8, retries=1)
         except Exception:
             continue
+        time.sleep(0.25)
         h = d.get("history") if isinstance(d, dict) else None
         pts = []
         if isinstance(h, list):
@@ -176,7 +192,7 @@ def phi(x):
     return 0.5 * math.erfc(-x / math.sqrt(2.0))
 
 def klines(sym):
-    try: d = fetch(BIN + "?symbol=" + sym + "&interval=1m&limit=720", 12)
+    try: d = fetch(BIN + "?symbol=" + sym + "&interval=1m&limit=720", 12, retries=1)
     except Exception: return []
     out = []
     if isinstance(d, list):
@@ -202,10 +218,10 @@ def sht_scan():
     for series_slug, sym, win_s, tag in SERIES:
         if time.time() > T0 + BUDGET_S * 0.75: break
         try:
-            # v3.2: ascending=false - свежие окна первыми (старых незакрытых событий накопилось > лимита)
             evs = fetch(GAMMA + "/events?series_slug=" + series_slug + "&closed=false&limit=60&order=endDate&ascending=false", 12)
         except Exception:
             continue
+        time.sleep(0.3)
         if not isinstance(evs, list): continue
         for ev in evs:
             try:
@@ -216,7 +232,9 @@ def sht_scan():
                 end = start + win_s
                 if end < t_now: continue
                 mkt = ev if ev.get("outcomePrices") else (ev.get("markets") or [{}])[0]
-                pr = [fnum(x) for x in plist(mkt.get("outcomePrices", "[]"))]
+                opp = mkt.get("outcomePrices")
+                if opp is None: continue
+                pr = [fnum(x) for x in plist(opp)]
                 if len(pr) != 2 or pr[0] <= 0: continue
                 liq = fnum(mkt.get("liquidityNum") or mkt.get("liquidity") or ev.get("liquidity"))
                 windows.append({"series": series_slug, "tag": tag, "slug": slug,
@@ -323,21 +341,23 @@ def settle_sht(st):
         else:
             pr = None
             try:
-                mk = fetch(GAMMA + "/markets?slug=" + pos["slug"], 10)
+                mk = fetch(GAMMA + "/markets?slug=" + pos["slug"], 10, retries=1)
                 if isinstance(mk, list) and mk:
                     pr = [fnum(x) for x in plist(mk[0].get("outcomePrices", "[]"))]
             except Exception:
                 pr = None
+            time.sleep(0.3)
             if not pr or len(pr) != 2 or max(pr) < 0.99:
                 # закрытые окна удаляются из /markets - берём исход из /events
                 try:
-                    ev = fetch(GAMMA + "/events?slug=" + pos["slug"], 10)
+                    ev = fetch(GAMMA + "/events?slug=" + pos["slug"], 10, retries=1)
                     if isinstance(ev, list) and ev:
                         e0 = ev[0]
                         src = e0 if e0.get("outcomePrices") else (e0.get("markets") or [{}])[0]
                         pr = [fnum(x) for x in plist(src.get("outcomePrices", "[]"))]
                 except Exception:
                     pass
+                time.sleep(0.3)
             if pr and len(pr) == 2 and max(pr) >= 0.99:
                 idx = 0 if pos["outcome"] == "Up" else 1
                 final = pr[idx]
@@ -365,7 +385,6 @@ LAB_CAP = 1500
 LAB_SNAPS = 6
 
 def lab_log(windows):
-    """Снимки живых окон для лаборатории: время, цена Up, fair, ликвидность."""
     lab = jload(ST["lab"], {})
     if not isinstance(lab, dict): lab = {}
     t_now = int(time.time())
@@ -395,6 +414,11 @@ def lab_log(windows):
 def main():
     st = jload(ST["state"], {"cash": CASH0, "positions": {}, "closed": [], "curve": [[now(), CASH0]], "runs": 0, "done_keys": {}, "cal": []})
     settle_sht(st)
+    # v3.3: бинарный движок первым - он основной и самый чувствительный к WAF-лимитам
+    windows = sht_scan()
+    sht_trade(st, windows)
+    sht_trade_streaks(st, windows)
+    lab_log(windows)
     ms = scan()
     by_slug = {}
     for m in ms: by_slug[m["slug"]] = m
@@ -433,10 +457,6 @@ def main():
             "opened": now(), "epoch": time.time()}
         held.add(s["slug"])
         keys[s["slug"]] = now()
-    windows = sht_scan()
-    sht_trade(st, windows)
-    sht_trade_streaks(st, windows)
-    lab_log(windows)
     eq = st["cash"] + sum(p["shares"] * p.get("last", p["entry"]) for p in st["positions"].values())
     st["curve"].append([now(), round(eq, 2)])
     st["curve"] = st["curve"][-1500:]
@@ -463,7 +483,7 @@ def main():
     jsave(ST["sht"], {"updated": now(), "live": live[:14],
         "cal": {"n": len(cal), "brier": brier, "acc": acc},
         "settled": settled_sht})
-    print("pm-lab v3.2: markets %d, windows %d, live %d, sht_open %d, equity %.2f" % (
+    print("pm-lab v3.3: markets %d, windows %d, live %d, sht_open %d, equity %.2f" % (
         len(ms), len(windows), len(live), st["stats"]["sht_open"], eq))
 
 if __name__ == "__main__":
