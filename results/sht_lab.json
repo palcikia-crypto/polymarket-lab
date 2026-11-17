@@ -389,5 +389,141 @@
    ]
   ],
   "outcome": null
+ },
+ "btc-updown-5m-1794903300": {
+  "series": "btc-updown-5m",
+  "tag": "sht5",
+  "sym": "BTCUSDT",
+  "win_s": 300,
+  "start": 1794903300,
+  "end": 1794903600,
+  "snaps": [
+   [
+    1794903543,
+    0.545,
+    0.0851,
+    16642
+   ]
+  ],
+  "outcome": null
+ },
+ "btc-updown-5m-1794903600": {
+  "series": "btc-updown-5m",
+  "tag": "sht5",
+  "sym": "BTCUSDT",
+  "win_s": 300,
+  "start": 1794903600,
+  "end": 1794903900,
+  "snaps": [
+   [
+    1794903543,
+    0.505,
+    null,
+    14589
+   ]
+  ],
+  "outcome": null
+ },
+ "btc-updown-15m-1794903300": {
+  "series": "btc-updown-15m",
+  "tag": "sht15",
+  "sym": "BTCUSDT",
+  "win_s": 900,
+  "start": 1794903300,
+  "end": 1794904200,
+  "snaps": [
+   [
+    1794903543,
+    0.495,
+    0.336,
+    10666
+   ]
+  ],
+  "outcome": null
+ },
+ "eth-updown-5m-1794903300": {
+  "series": "eth-updown-5m",
+  "tag": "sht5",
+  "sym": "ETHUSDT",
+  "win_s": 300,
+  "start": 1794903300,
+  "end": 1794903600,
+  "snaps": [
+   [
+    1794903543,
+    0.495,
+    0.2919,
+    7002
+   ]
+  ],
+  "outcome": null
+ },
+ "eth-updown-5m-1794903600": {
+  "series": "eth-updown-5m",
+  "tag": "sht5",
+  "sym": "ETHUSDT",
+  "win_s": 300,
+  "start": 1794903600,
+  "end": 1794903900,
+  "snaps": [
+   [
+    1794903543,
+    0.505,
+    null,
+    8005
+   ]
+  ],
+  "outcome": null
+ },
+ "eth-updown-15m-1794903300": {
+  "series": "eth-updown-15m",
+  "tag": "sht15",
+  "sym": "ETHUSDT",
+  "win_s": 900,
+  "start": 1794903300,
+  "end": 1794904200,
+  "snaps": [
+   [
+    1794903543,
+    0.495,
+    0.4343,
+    5080
+   ]
+  ],
+  "outcome": null
+ },
+ "sol-updown-5m-1794903300": {
+  "series": "sol-updown-5m",
+  "tag": "sht5",
+  "sym": "SOLUSDT",
+  "win_s": 300,
+  "start": 1794903300,
+  "end": 1794903600,
+  "snaps": [
+   [
+    1794903543,
+    0.36,
+    0.2505,
+    5133
+   ]
+  ],
+  "outcome": null
+ },
+ "sol-updown-5m-1794903600": {
+  "series": "sol-updown-5m",
+  "tag": "sht5",
+  "sym": "SOLUSDT",
+  "win_s": 300,
+  "start": 1794903600,
+  "end": 1794903900,
+  "snaps": [
+   [
+    1794903543,
+    0.5,
+    null,
+    4621
+   ]
+  ],
+  "outcome": null
  }
 }
