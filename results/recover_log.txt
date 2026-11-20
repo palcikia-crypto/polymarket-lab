@@ -1,4 +1,5 @@
-commits: 25
+commits: 26
+5bbb2f5d len=14395 src=full score=295.17
 7736b5d2 len=13221 src=full score=256.16
 c2ad2dfd len=11542 src=full score=234.15
 a4082eeb len=10674 src=full score=223.14
@@ -24,5 +25,5 @@ ba435c34 len=479 src=full score=0.03
 fc8709ee len=433 src=full score=0.02
 daedcbe9 len=32793 src=salvage score=7.0
 fda7d9bf len=91 src=salvage score=-1
-best=256.16 cur=256.16
+best=295.17 cur=295.17
 текущий не хуже - не трогаю
