@@ -1,20 +1,50 @@
 {
- "updated": "2026-11-20T10:00:22Z",
+ "updated": "2026-11-20T18:30:50Z",
  "scanned": 200,
  "signals": [
   {
    "strategy": "vols",
-   "slug": "will-bitcoin-reach-110000-by-december-31-2026-658-339-969",
-   "question": "Will Bitcoin reach $110,000 by December 31, 2026?",
+   "slug": "clarity-act-signed-into-law-in-2026",
+   "question": "Clarity Act (H.R.3633) signed into law in 2026?",
    "outcome": "-",
    "price": 0,
    "edge": 0,
-   "note": "объём 24ч 68375 против среднего 16248",
-   "liq": 136434,
-   "v24": 68375,
+   "note": "объём 24ч 391197 против среднего 61854",
+   "liq": 311599,
+   "v24": 391197,
    "z": 0.0,
    "end": "2027-01-01",
-   "days_left": 41.6,
+   "days_left": 41.2,
+   "tradeable": false
+  },
+  {
+   "strategy": "vols",
+   "slug": "bitcoin-all-time-high-by-december-31-2026",
+   "question": "Bitcoin all time high by December 31, 2026?",
+   "outcome": "-",
+   "price": 0,
+   "edge": 0,
+   "note": "объём 24ч 133989 против среднего 23984",
+   "liq": 150721,
+   "v24": 133989,
+   "z": 0.0,
+   "end": "2027-01-01",
+   "days_left": 41.2,
+   "tradeable": false
+  },
+  {
+   "strategy": "vols",
+   "slug": "will-solana-reach-180-in-november-2026",
+   "question": "Will Solana reach $180 in November?",
+   "outcome": "-",
+   "price": 0,
+   "edge": 0,
+   "note": "объём 24ч 23116 против среднего 4139",
+   "liq": 122376,
+   "v24": 23116,
+   "z": 0.0,
+   "end": "2026-12-01",
+   "days_left": 10.2,
    "tradeable": false
   }
  ]
