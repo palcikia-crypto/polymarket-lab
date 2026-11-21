@@ -1,20 +1,20 @@
 {
- "updated": "2026-11-21T07:01:46Z",
+ "updated": "2026-11-21T15:15:46Z",
  "scanned": 200,
  "signals": [
   {
    "strategy": "vols",
-   "slug": "clarity-act-signed-into-law-in-2026",
-   "question": "Clarity Act (H.R.3633) signed into law in 2026?",
+   "slug": "bitcoin-all-time-high-by-december-31-2026",
+   "question": "Bitcoin all time high by December 31, 2026?",
    "outcome": "-",
    "price": 0,
    "edge": 0,
-   "note": "объём 24ч 498585 против среднего 77054",
-   "liq": 240974,
-   "v24": 498585,
+   "note": "объём 24ч 122742 против среднего 24518",
+   "liq": 145602,
+   "v24": 122742,
    "z": 0.0,
    "end": "2027-01-01",
-   "days_left": 40.7,
+   "days_left": 40.4,
    "tradeable": false
   },
   {
@@ -24,27 +24,12 @@
    "outcome": "-",
    "price": 0,
    "edge": 0,
-   "note": "объём 24ч 141338 против среднего 22670",
-   "liq": 160539,
-   "v24": 141338,
+   "note": "объём 24ч 138719 против среднего 23734",
+   "liq": 142994,
+   "v24": 138719,
    "z": 0.0,
    "end": "2027-01-01",
-   "days_left": 40.7,
-   "tradeable": false
-  },
-  {
-   "strategy": "vols",
-   "slug": "bitcoin-all-time-high-by-december-31-2026",
-   "question": "Bitcoin all time high by December 31, 2026?",
-   "outcome": "-",
-   "price": 0,
-   "edge": 0,
-   "note": "объём 24ч 137489 против среднего 24342",
-   "liq": 145840,
-   "v24": 137489,
-   "z": 0.0,
-   "end": "2027-01-01",
-   "days_left": 40.7,
+   "days_left": 40.4,
    "tradeable": false
   }
  ]
