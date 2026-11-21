@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T00:09:05Z",
+ "updated": "2026-11-21T07:01:46Z",
  "scanned": 200,
  "signals": [
   {
@@ -9,12 +9,27 @@
    "outcome": "-",
    "price": 0,
    "edge": 0,
-   "note": "объём 24ч 485520 против среднего 75374",
-   "liq": 252639,
-   "v24": 485520,
+   "note": "объём 24ч 498585 против среднего 77054",
+   "liq": 240974,
+   "v24": 498585,
    "z": 0.0,
    "end": "2027-01-01",
-   "days_left": 41.0,
+   "days_left": 40.7,
+   "tradeable": false
+  },
+  {
+   "strategy": "vols",
+   "slug": "will-bitcoin-reach-120000-by-december-31-2026-625-425-562",
+   "question": "Will Bitcoin reach $120,000 by December 31, 2026?",
+   "outcome": "-",
+   "price": 0,
+   "edge": 0,
+   "note": "объём 24ч 141338 против среднего 22670",
+   "liq": 160539,
+   "v24": 141338,
+   "z": 0.0,
+   "end": "2027-01-01",
+   "days_left": 40.7,
    "tradeable": false
   },
   {
@@ -24,27 +39,12 @@
    "outcome": "-",
    "price": 0,
    "edge": 0,
-   "note": "объём 24ч 132523 против среднего 24034",
-   "liq": 150897,
-   "v24": 132523,
+   "note": "объём 24ч 137489 против среднего 24342",
+   "liq": 145840,
+   "v24": 137489,
    "z": 0.0,
    "end": "2027-01-01",
-   "days_left": 41.0,
-   "tradeable": false
-  },
-  {
-   "strategy": "vols",
-   "slug": "will-solana-reach-180-in-november-2026",
-   "question": "Will Solana reach $180 in November?",
-   "outcome": "-",
-   "price": 0,
-   "edge": 0,
-   "note": "объём 24ч 23116 против среднего 4139",
-   "liq": 127869,
-   "v24": 23116,
-   "z": 0.0,
-   "end": "2026-12-01",
-   "days_left": 10.0,
+   "days_left": 40.7,
    "tradeable": false
   }
  ]
