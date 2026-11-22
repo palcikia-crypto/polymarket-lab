@@ -1,20 +1,20 @@
 {
- "updated": "2026-11-22T15:49:20Z",
+ "updated": "2026-11-22T21:20:37Z",
  "scanned": 200,
  "signals": [
   {
    "strategy": "vols",
-   "slug": "will-bitcoin-reach-97pt5k-in-november-2026",
-   "question": "Will Bitcoin reach $97,500 in November?",
+   "slug": "will-solana-reach-180-in-november-2026",
+   "question": "Will Solana reach $180 in November?",
    "outcome": "-",
    "price": 0,
    "edge": 0,
-   "note": "объём 24ч 36746 против среднего 9822",
-   "liq": 125073,
-   "v24": 36746,
+   "note": "объём 24ч 2000 против среднего 531",
+   "liq": 126497,
+   "v24": 2000,
    "z": 0.0,
    "end": "2026-12-01",
-   "days_left": 8.3,
+   "days_left": 8.1,
    "tradeable": false
   }
  ]
