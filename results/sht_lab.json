@@ -3806,5 +3806,107 @@
    ]
   ],
   "outcome": null
+ },
+ "btc-updown-5m-1795635300": {
+  "series": "btc-updown-5m",
+  "tag": "sht5",
+  "sym": "BTCUSDT",
+  "win_s": 300,
+  "start": 1795635300,
+  "end": 1795635600,
+  "snaps": [
+   [
+    1795635393,
+    0.505,
+    0.5222,
+    23283
+   ]
+  ],
+  "outcome": null
+ },
+ "btc-updown-15m-1795635000": {
+  "series": "btc-updown-15m",
+  "tag": "sht15",
+  "sym": "BTCUSDT",
+  "win_s": 900,
+  "start": 1795635000,
+  "end": 1795635900,
+  "snaps": [
+   [
+    1795635393,
+    0.345,
+    0.3193,
+    10367
+   ]
+  ],
+  "outcome": null
+ },
+ "btc-updown-1h-1795633200": {
+  "series": "btc-updown-1h",
+  "tag": "sht1h",
+  "sym": "BTCUSDT",
+  "win_s": 3600,
+  "start": 1795633200,
+  "end": 1795636800,
+  "snaps": [
+   [
+    1795635393,
+    0.885,
+    0.8594,
+    6317
+   ]
+  ],
+  "outcome": null
+ },
+ "eth-updown-5m-1795635300": {
+  "series": "eth-updown-5m",
+  "tag": "sht5",
+  "sym": "ETHUSDT",
+  "win_s": 300,
+  "start": 1795635300,
+  "end": 1795635600,
+  "snaps": [
+   [
+    1795635393,
+    0.495,
+    0.4314,
+    10613
+   ]
+  ],
+  "outcome": null
+ },
+ "eth-updown-15m-1795635000": {
+  "series": "eth-updown-15m",
+  "tag": "sht15",
+  "sym": "ETHUSDT",
+  "win_s": 900,
+  "start": 1795635000,
+  "end": 1795635900,
+  "snaps": [
+   [
+    1795635393,
+    0.465,
+    0.365,
+    3534
+   ]
+  ],
+  "outcome": null
+ },
+ "sol-updown-5m-1795635300": {
+  "series": "sol-updown-5m",
+  "tag": "sht5",
+  "sym": "SOLUSDT",
+  "win_s": 300,
+  "start": 1795635300,
+  "end": 1795635600,
+  "snaps": [
+   [
+    1795635393,
+    0.505,
+    0.3811,
+    5098
+   ]
+  ],
+  "outcome": null
  }
 }
