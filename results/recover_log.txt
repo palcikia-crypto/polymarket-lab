@@ -1,4 +1,5 @@
-commits: 42
+commits: 43
+66bdca07 len=30061 src=full score=675.34
 a4cc550a len=27987 src=full score=643.33
 3e710215 len=26721 src=full score=622.32
 92d3823c len=25972 src=full score=584.31
@@ -41,5 +42,5 @@ ba435c34 len=479 src=full score=0.03
 fc8709ee len=433 src=full score=0.02
 daedcbe9 len=32793 src=salvage score=7.0
 fda7d9bf len=91 src=salvage score=-1
-best=643.33 cur=643.33
+best=675.34 cur=675.34
 текущий не хуже - не трогаю
