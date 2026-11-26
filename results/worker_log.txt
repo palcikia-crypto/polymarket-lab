@@ -1,1 +1,1 @@
-pm-lab v3.5: markets 200, windows 6, live 6, sht_open 3, equity 12819.84
+pm-lab v3.5: markets 200, windows 6, live 6, sht_open 4, equity 12770.02
