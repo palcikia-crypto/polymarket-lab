@@ -1,4 +1,5 @@
-commits: 46
+commits: 47
+ca3db314 len=35679 src=full score=824.38
 12793778 len=34493 src=full score=785.37
 4a954c88 len=32851 src=full score=754.36
 37a6f23a len=31671 src=full score=715.35
@@ -45,5 +46,5 @@ ba435c34 len=479 src=full score=0.03
 fc8709ee len=433 src=full score=0.02
 daedcbe9 len=32793 src=salvage score=7.0
 fda7d9bf len=91 src=salvage score=-1
-best=785.37 cur=785.37
+best=824.38 cur=824.38
 текущий не хуже - не трогаю
