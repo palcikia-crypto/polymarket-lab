@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T20:40:15Z",
+ "updated": "2026-11-28T02:57:50Z",
  "scanned": 200,
  "signals": [
   {
@@ -9,12 +9,27 @@
    "outcome": "-",
    "price": 0,
    "edge": 0,
-   "note": "объём 24ч 106804 против среднего 15623",
-   "liq": 297632,
-   "v24": 106804,
+   "note": "объём 24ч 106651 против среднего 15623",
+   "liq": 297681,
+   "v24": 106651,
    "z": 0.0,
    "end": "2027-01-01",
-   "days_left": 34.1,
+   "days_left": 33.9,
+   "tradeable": false
+  },
+  {
+   "strategy": "vols",
+   "slug": "clarity-act-signed-into-law-in-2026",
+   "question": "Clarity Act (H.R.3633) signed into law in 2026?",
+   "outcome": "-",
+   "price": 0,
+   "edge": 0,
+   "note": "объём 24ч 70633 против среднего 23270",
+   "liq": 185467,
+   "v24": 70633,
+   "z": 0.0,
+   "end": "2027-01-01",
+   "days_left": 33.9,
    "tradeable": false
   }
  ]
